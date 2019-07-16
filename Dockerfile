@@ -3,9 +3,10 @@ MAINTAINER ASCDC <asdc.sinica@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ADD run.sh /run.sh
+RUN mkdir /script
+ADD run.sh /script/run.sh
 
-RUN chmod +x /*.sh && \
+RUN chmod +x /script/*.sh && \
 	apt-get update && \
 	DEBIAN_FRONTEND=noninteractive && \
 	apt-get -yqq install sudo apt-utils software-properties-common locales language-pack-zh-hant language-pack-zh-hant-base && \
@@ -25,4 +26,4 @@ RUN DEBIAN_FRONTEND=noninteractive && apt-get update && \
 
 EXPOSE 80
 WORKDIR /var/www/html
-ENTRYPOINT ["/run.sh"]
+ENTRYPOINT ["/script/run.sh"]
